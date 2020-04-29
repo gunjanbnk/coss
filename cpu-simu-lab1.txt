@@ -1,0 +1,31 @@
+Enter the following program which computes average of two numbers:
+MOV #4,R00
+MOV #6,R01
+ADD R00, R01
+MOV R01,R02
+DIV #2,R02
+STB R02, 00
+HLT
+
+Write a program to find factorial of a given number.
+
+MOV #5 R01
+MOV R01 R02
+MOV8:
+SUB #1 R01
+MUL R01 R02
+CMP #0 R01
+JNE MOV8
+STB R02 00
+HLT
+
+Write a program to find whether the given number is odd or even
+MOV #5 R01
+MOV R01 R02
+DIV #2 R01
+MUL #2 R01
+CMP R01 R02
+JEQ MOV8
+STB #0 00 # Odd
+MOV8:
+STB #1 00 # Even
