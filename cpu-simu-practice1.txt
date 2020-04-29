@@ -1,0 +1,42 @@
+1.Write a conditional statement such that if R02 is greater than(>)R01 then R03 is set to 8. 
+
+MOV #2 R01
+MOV #10 R02
+CMP R02 R01 // If R02 = R01 then the status flag Z will be set; if R01 > R02 then none of the status flags Z and N will be set; if R01 < R02 then the status flag N will be set.
+JGT $MOV8  // If R01 < R02 then it will not jump. If R01>R02 then it will jump to lable MOV8
+HLT
+MOV8:
+MOV #8 R03
+
+
+2. Write a conditional statement such that if R02 is less than or equal to(<=)R01 then R03 is set to -5.(Use R01 as the first operand and R02 as the second operand)
+
+MOV #13 R01
+MOV #5 R02
+CMP R01 R02
+JLE $MOV8
+HLT
+MOV8:
+MOV #-5 R03
+
+3. Write a conditional statement such that if R01 = 0 then R03 is set to 5 elseR03 is set to R01 plus 1.
+
+MOV #13 R01
+CMP #0 R01
+JEQ $MOV8
+ADD #1 R01
+MOV R01 R03
+HLT
+MOV8:
+MOV #5 R03
+HLT
+
+4. Write a loop that repeats 5 timeswhere R02 is incremented by 2 every time the loop repeats.
+MOV #0 R01
+MOV #5 R02
+MOV8:
+ADD #2 R02
+ADD #1 R01
+CMP #5 R01
+JNE MOV8
+HLT
