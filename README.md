@@ -7,6 +7,7 @@ Simulator Instruction Sub-set Inst Description
 
 Data transfer instructions
 --------------------------
+```
 MOV
 	Move data to register; move register to register
 	e.g.
@@ -37,9 +38,10 @@ POP
 	e.g.
 	POP R05 pops contents of top of stack into register R05
 	Note: If you try to POP from an empty stack you will get the error message “Stack underflow”.
-
+```
 Arithmetic instructions
 -----------------------
+```
 ADD
 	Add number to register; add register to register
 	e.g.
@@ -51,9 +53,10 @@ MUL
 	Multiply number with register; multiply register with register
 DIV
 	Divide number with register; divide register with register 
-
+```
 Control transfer instructions
 -----------------------------
+```
 JMP
 	Jump to instruction address unconditionally
 	e.g.
@@ -83,9 +86,10 @@ SWI
 	Software interrupt (used to request OS help)
 HLT
 	Halt simulation 
-
+```
 Comparison instruction
 ----------------------
+```
 CMP
 	Compare number with register; compare register with register
 	e.g.
@@ -95,12 +99,14 @@ CMP
 	If R01 = R03 then the status flag Z will be set, i.e. the Z box is checked.
 	If R01 < R03 then none of the status flags will be set, i.e. none of the status flag boxes are checked.
 	If R01 > R03 then the status flag N will be set, i.e. the N status box is checked. 
-
+```
 Input, output instructions
 --------------------------
+```
 IN
 	Get input data (if available) from an external IO device
 OUT
 	Output data to an external IO device
 	e.g.
 	OUT 16, 0 outputs contents of data in location 16 to the console (the second parameter must always be a 0)
+```
