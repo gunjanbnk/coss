@@ -1,4 +1,5 @@
-Enter the following program which computes average of two numbers:
+1. Enter the following program which computes average of two numbers:
+Ans:
 MOV #4,R00
 MOV #6,R01
 ADD R00, R01
@@ -7,25 +8,39 @@ DIV #2,R02
 STB R02, 00
 HLT
 
-Write a program to find factorial of a given number.
+2. Write a program to find factorial of a given number.
+Ans:
 
 MOV #5 R01
 MOV R01 R02
-MOV8:
-SUB #1 R01
+CMP #-1 R01 ## If negative values then return
+JGT $L0
+HLT
+L0:
+CMP #0 R01 ## If value is 0 then return 1
+JEQ $L1
+CMP #1 R01 ## If value is 1 then return 1
+JNE $MOV8
+L1:
+STB #1 00 #Check this value in SHOW PROGRAM DATA MEMORY. Value will be displayed in hex
+HLT
+MOV8: ## If value is greater than 1
+DEC R01
 MUL R01 R02
-CMP #0 R01
-JNE MOV8
-STB R02 00
+CMP #1 R01
+JNE $MOV8
+STB R02 00 #Check this value in SHOW PROGRAM DATA MEMORY. Value will be displayed in hex
 HLT
 
-Write a program to find whether the given number is odd or even
+3. Write a program to find whether the given number is odd or even
+Ans:
 MOV #5 R01
 MOV R01 R02
 DIV #2 R01
 MUL #2 R01
 CMP R01 R02
-JEQ MOV8
-STB #0 00 # Odd
+JEQ $MOV8
+STB #0 00 # Odd. Check this value in SHOW PROGRAM DATA MEMORY
 MOV8:
-STB #1 00 # Even
+STB #1 00 # Even. Check this value in SHOW PROGRAM DATA MEMORY
+HLT

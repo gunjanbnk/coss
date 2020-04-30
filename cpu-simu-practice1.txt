@@ -38,5 +38,91 @@ MOV8:
 ADD #2 R02
 ADD #1 R01
 CMP #5 R01
-JNE MOV8
+JNE $MOV8
 HLT
+
+5. Write a loop that repeats while R04 is > 0. Set the initial value of R04 to 8.
+
+MOV #8 R04
+L0:
+CMP #0 R04
+JGT L0
+HLT
+
+6. Write a routine that pushes numbers 8 and 2 on top of stack. It then pops the two numbers one by one from stack, adds them and pushes the result back to top of stack.
+
+MSF ## MARKS STACK FRAME (control transfer)
+CAL L0 ## Call subroutine (control transfer)
+HLT ## Halt the simulator
+
+L0:     ## The subroutine
+PSH #5  ## Push the element in stack
+PSH #10
+PSH #20
+POP R00 ## remove the top element from stack
+POP R01
+POP R02
+ADD R00 R01
+ADD R01 R02
+PSH R02  ## If you don't push then it shows as stack underflow error if you use RET
+RET 	## The RET instruction returns to the address which is stored on top of the stack (by the CAL instruction). In this exercise a value is PSH'ed on top of it, so RET will use this instead.
+
+
+7. Place 15 numbers from 1 to 15 on top of stack using the push instruction in a loop. Then in a second loop use the pop instruction to pop two numbers from top of stack, add them and push the result back to top of stack. The second loop repeats this until there is only one number left on top of stack which should be the final result.
+
+MOV #1 R00
+L1:
+PSH R00
+INC R00
+CMP 15 R00
+JLE $L1
+
+L2:
+POP R01
+POP R02
+ADD R01 R02
+PSH R02
+DEC R00
+CMP #2 R00
+JGT $L2
+HLT
+
+8. Write a loop in which 10 numbers from 48 to 57 are stored as single bytes in memory starting from memory address 24. You should use register indirect addressing method of storing the numbers in memory.
+
+0000 MOV #24, R02
+0006 MOV #48, R01
+0012 L0:
+0012 STB R01, @R02
+0017 INC R01
+0020 INC R02
+0023 CMP #57, R01
+0029 JLE $L0
+0033 HLT
+
+9. Write a loop in which the numbers stored in memory by the program in (13) above are copied to a different part of the memory starting from address location 80.
+
+0033 MOV #80, R03
+0039 MOV #24, R02
+0045 L1:
+0045 LDBI @R02, R01
+0050 STBI R01, @R03
+0055 CMP #34, R02
+0061 JLT $L1
+0065 HLT
+
+10. Locate the instruction that stores a byte in memory and use it to store number 65 in memory address location 20 (this uses memory direct addressing method).
+
+0000 STB #65, 20
+
+11. Move number 51 into register R04. Use the store instruction to store the contents of R04 in memory location 21 (this uses register direct addressing method).
+
+STB R04, 21
+
+12. Move number 22 into register R04. Use this information to indirectly store number 58 in memory (hint: you will need to use the ‘@’ prefix for this – see the list of instructions in appendix) - (this uses register indirect addressing method).
+
+MOV #22, R04
+STB #58, @R04  ## In add new instruction, you need to select indirect MEM
+
+13. Locate the instruction that loads a byte from memory into a register. Use this to load the number in memory address 22 into register R10.
+
+LDB 22, R10
